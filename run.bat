@@ -33,6 +33,6 @@ echo.
 echo Press Ctrl+C to stop the server
 echo.
 
-python app\main.py
+uvicorn app.main:app --reload
 
 pause

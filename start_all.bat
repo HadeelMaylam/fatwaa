@@ -6,7 +6,7 @@ echo.
 
 REM Start Backend in new window
 echo [1/2] Starting Backend (FastAPI)...
-start "Backend - FastAPI" cmd /k "venv\Scripts\activate && python app\main.py"
+start "Backend - FastAPI" cmd /k "venv\Scripts\activate && uvicorn app.main:app --reload"
 
 REM Wait a bit for backend to start
 timeout /t 3 /nobreak >nul
