@@ -60,7 +60,7 @@ class LLMService:
                     }
                 ],
                 temperature=0.3,  # Low temperature for accuracy
-                max_completion_tokens=2048,
+                max_tokens=2048,
                 top_p=0.9,
                 stream=False
             )
