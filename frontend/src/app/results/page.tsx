@@ -68,10 +68,10 @@ export default function ResultsPage() {
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <h3 className="text-sage-900 font-bold text-xl mb-2">
-            المبدع: {fatwa.shaykh}
+            الشيخ: {fatwa.shaykh}
           </h3>
           <p className="text-sage-700 text-sm">
-            العصر: {fatwa.series}
+            السلسلة: {fatwa.series}
           </p>
         </div>
         {fatwa.confidence_score && (
