@@ -17,7 +17,7 @@ class LLMService:
         """Initialize Groq client."""
         try:
             self.client = Groq(api_key=settings.groq_api_key)
-            self.model = "qwen2.5-72b-instruct"  # Best Qwen model for Arabic
+            self.model = "llama-3.1-70b-versatile"  # Good for Arabic
             logger.info("Groq LLM client initialized successfully")
         except Exception as e:
             logger.error(f"Failed to initialize Groq client: {e}")
