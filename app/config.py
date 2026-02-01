@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     qdrant_api_key: str
     qdrant_collection_name: str = "fatwas"
 
+    # Groq API Configuration
+    groq_api_key: str
+
     # Application Settings
     debug: bool = False
     log_level: str = "INFO"

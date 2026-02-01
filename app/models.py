@@ -22,6 +22,7 @@ class FatwaResponse(BaseModel):
     series: str = Field(..., description="Series name")
     link: str = Field(..., description="Source URL")
     confidence_score: Optional[float] = Field(None, description="Relevance score")
+    summary: Optional[str] = Field(None, description="LLM-generated focused summary (for best result only)")
 
 
 class SearchResponse(BaseModel):

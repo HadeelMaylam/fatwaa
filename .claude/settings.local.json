@@ -3,7 +3,11 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(pip install:*)",
-      "Bash(python scripts/index_fatwas.py:*)"
+      "Bash(python scripts/index_fatwas.py:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "WebFetch(domain:python-client.qdrant.tech)"
     ]
   }
 }

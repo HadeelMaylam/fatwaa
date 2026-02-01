@@ -129,9 +129,10 @@ async def search_fatwas(request: SearchRequest):
                 reason="النتائج الموجودة ذات صلة ضعيفة بسؤالك"
             )
 
-        # Layer 6: Format response
+        # Layer 6: Format response (with LLM summary for best result)
         response = formatter.format_success_response(
-            filtered_fatwas,
+            ranked_fatwas=filtered_fatwas,
+            user_query=request.query,
             max_results=request.limit
         )
 

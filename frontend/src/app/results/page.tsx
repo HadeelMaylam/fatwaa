@@ -11,6 +11,7 @@ interface Fatwa {
   series: string
   link: string
   confidence_score?: number
+  summary?: string
 }
 
 interface SearchResponse {
@@ -96,13 +97,31 @@ export default function ResultsPage() {
         </p>
       </div>
 
+      {/* AI Summary (for best result only) */}
+      {fatwa.summary && (
+        <div className="mb-4">
+          <div className="bg-gradient-to-r from-sage-50 to-sage-100 rounded-xl p-5 border-2 border-sage-300">
+            <h4 className="text-sage-800 font-bold mb-3 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+              </svg>
+              الخلاصة المركزة:
+            </h4>
+            <p className="text-sage-900 leading-relaxed whitespace-pre-line font-medium">
+              {fatwa.summary}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Answer */}
       <div className="mb-4">
         <h4 className="text-sage-800 font-semibold mb-2 flex items-center gap-2">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
           </svg>
-          الجواب:
+          الجواب الكامل:
         </h4>
         <p className="text-sage-900 leading-relaxed bg-white/50 p-4 rounded-xl whitespace-pre-line">
           {fatwa.answer}

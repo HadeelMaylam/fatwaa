@@ -8,6 +8,7 @@ from loguru import logger
 
 from app.models import FatwaDetail, FatwaResponse, SearchResponse
 from app.layers.verifier import verifier
+from app.services.llm_service import llm_service
 
 
 class Formatter:
@@ -40,6 +41,7 @@ class Formatter:
     def format_success_response(
         self,
         ranked_fatwas: List[Tuple[FatwaDetail, float]],
+        user_query: str,
         max_results: int = 5
     ) -> SearchResponse:
         """
@@ -47,6 +49,7 @@ class Formatter:
 
         Args:
             ranked_fatwas: List of (FatwaDetail, score) tuples (sorted)
+            user_query: Original user query (for LLM summary generation)
             max_results: Maximum results to include
 
         Returns:
@@ -60,6 +63,19 @@ class Formatter:
 
         # Format main result
         main_fatwa = self.format_fatwa(top_fatwa, top_score)
+
+        # Generate LLM summary for the best result only
+        try:
+            summary = llm_service.generate_focused_summary(
+                user_question=user_query,
+                fatwa_answer=top_fatwa.answer
+            )
+            if summary:
+                main_fatwa.summary = summary
+                logger.info("Added LLM summary to best result")
+        except Exception as e:
+            logger.warning(f"Could not generate summary: {e}")
+            # Continue without summary
 
         # Format other results (up to max_results - 1)
         other_results = [
