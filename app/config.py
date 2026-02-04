@@ -1,10 +1,31 @@
 """
 Configuration management for Fatwa RAG system.
 Uses Pydantic Settings for environment variable handling.
+Supports both .env files and Streamlit secrets.
 """
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
+import os
+
+
+def load_streamlit_secrets():
+    """Load secrets from Streamlit if available."""
+    try:
+        import streamlit as st
+        if hasattr(st, 'secrets') and len(st.secrets) > 0:
+            # Set environment variables from Streamlit secrets
+            for key, value in st.secrets.items():
+                if isinstance(value, str):
+                    os.environ[key.upper()] = value
+            return True
+    except Exception:
+        pass
+    return False
+
+
+# Try to load Streamlit secrets first
+load_streamlit_secrets()
 
 
 class Settings(BaseSettings):
@@ -20,7 +41,7 @@ class Settings(BaseSettings):
     qdrant_collection_name: str = "fatwas"
 
     # Groq API Configuration
-    groq_api_key: str
+    groq_api_key: str = ""
 
     # Application Settings
     debug: bool = False
