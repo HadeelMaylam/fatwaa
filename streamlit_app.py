@@ -199,17 +199,9 @@ def display_fatwa_card(fatwa, index: int, is_best: bool = False):
     """Display a fatwa result card."""
 
     with st.container():
-        # Header with shaykh name and confidence
-        col1, col2 = st.columns([4, 1])
-
-        with col1:
-            st.markdown(f"**الشيخ:** {fatwa.shaykh}")
-            st.markdown(f"*السلسلة:* {fatwa.series}")
-
-        with col2:
-            if fatwa.confidence_score:
-                score_pct = int(fatwa.confidence_score * 100)
-                st.metric("الثقة", f"{score_pct}%")
+        # Header with shaykh name
+        st.markdown(f"**الشيخ:** {fatwa.shaykh}")
+        st.markdown(f"*السلسلة:* {fatwa.series}")
 
         st.divider()
 
@@ -308,7 +300,6 @@ def main():
     st.markdown("""
     <div class="main-header">
         <div class="main-title">🕌 البحث في الفتاوى</div>
-        <div class="main-subtitle">ابحث في فتاوى العلماء بالذكاء الاصطناعي</div>
     </div>
     """, unsafe_allow_html=True)
 
